@@ -1,3 +1,66 @@
+## [04월 27일]
+
+# <6장. 객체>
+* 배열
+>* 배열 선언식<br>
+     let array = ['사과', '바나나', '망고, '딸기'];<br><br>
+>* 배열 접근<br>
+    array[0] -> 사과<br>
+    array[1] -> 망고<br>
+    <배열은 요소에 접근할 때 인덱스를 사용하고, 객체는 키를 사용함><br><br>
+>* 객체 선언식<br>
+    let product = {<br>
+    제품명 : '7D 건조 망고',<br>
+    유형 : '당절임',<br>
+    성분 : '망고, 설탕, 메타중아황산나트륨, 치자황색소',<br>
+    원산지 : '필리핀'<br>
+    };<br><br>
+    출력문<br>
+    console.log(product);<br><br>
+<키> - 제품명, 유형, 성분, 원산지<br>
+<속성> - 7D 건조 망고, 당절임, (망고, 설탕, 메타중이황산나트륨, 치자황색소), 필리핀<br>
+<객체 접근><br>
+product['키1'] -> '속성1'<br>
+: product.키1 -> 속성1<br><br>
+
+* 객체와 반복문
+>* 객체와 반복문<br>
+객체 선언<br>
+let object = {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name: '바나나',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;price: 1200<br>
+};<br><br>
+출력<br>
+for(let key in object){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;console.log('&{object[key]}');<br>
+}<br>
+
+* 속성과 메소드
+>* 요소 : 배열 내부에 있는 값 하나하나
+>* 속성 : 객체 내부에 있는 값 하나하나
+>* 객체의 다양한 자료형
+>* 메소드 : 객체의 속성 중 자료형이 함수인 속성<br>
+객체 선언식<br>
+let object = {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name : '바나나',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;price : 1200,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print : function (){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+console.log('${this.name}의 가격은 ${this.price}원입니다.')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+};<br><br>
+호출<br>
+object.print();<br><br>
+출력 -> 바나나의 가격은 1200원입니다.<br>
+
+* 생성자 함수와 프로토타입
+>* 객체 지향 프로그래밍 : 현실의 객체를 모방해서 프로그래밍
+>* 생성자함수<br>
+객체를 만드는 함수, 대문자로 시작하는 이름을 사용함
+
+
+
+
 ## [ 03월 30일 ]
 
 # < IF 문 >
