@@ -1,3 +1,112 @@
+## [ 5월 25일 ]
+# 9장 express 모듈
+## 1. 요청과 응답
+* 요청하는 대상 : 클라이언트(사용자)<br>
+-> 요청 메세지 : 클라이언트가 서버로 보내는 편지
+* 응답하는 대상 : 서버(제공자)<br>
+-> 응답 메시지 : 서버가 클라이언트로 보내는 편지
+## 2. express 모듈을 사용한 서버 생성과 실행
+* express 모듈의 기본 메소드
+>* express() : 서버 애플리케이션 객체를 생성합니다.
+>* app.use() : 요청이 왔을 때 실행할 함수를 지정합니다.
+>* app.listen() : 서버를 실행합니다.
+## 3. 페이지 라우팅
+* 페이지 라우팅 : 클라이언트 요청에 적절한 페이지를 제공하는 기술
+* express 모듈의 페이지 라우팅 메소드
+>* get(path. callback) : GET 요청이 발생했을 때 이벤트 리스너를 지정합니다.
+>* post(path. callback) : POST 요청이 발생했을 때 이벤트 리스너를 지정합니다.
+>* put(path. callback) : PUT 요청이 발생했을 때 이벤트 리스너를 지정합니다.
+>* delete(path. callback) DELETE 요청이 발생했을 때 이벤트 리스너를 지정합니다.
+>* all(path. callback) : 모든 요청이 발생했을 때 이벤트 리스너를 지정합니다.
+* 페이지 라우팅을 할 때 토큰을 활용함
+>* ':<토큰이름>' 형태로 설정
+>* 토큰은 다른 문자열로 변환 입력가능, request 객체의 params 속성으로 전달됨
+## 4. 요청과 응답
+* response 객체
+>* send() : 데이터 본물을 제공합니다.
+>* status() : 상태 코드를 제공합니다.
+>* set() : 헤더를 설정합니다.
+* 데이터 제공
+>* send()메소드 : 사용자에게 데이터 본문을 제공
+>* send()메소드는 가장 마지막에 실행해야 하며, 두 번 실행할 수 없음
+* Content-Type<br>
+-> 서버가 Content-Type을 제공 : 웹 브라우저는 헤더를 확인, 제공된 데이터의 형태
+를 확인(MIME라는 문자열로 제공)
+* MINE 형식
+>* text/plain : 기본적인 텍스트를 의미합니다.
+>* text/html : html 데이터를 의미합니다.
+>* image/png: png 데이터를 의미합니다.
+>* audio/mpe : MP3 음악 파일을 의미합니다.
+>* video/mpeg : MPEG 비디오 파일을 의미합니다.
+>* application/json : json 데이터를 의미합니다.
+>* multipart/form-data : 입력 양식 데이터를 의미합니다.
+* Content-Type 지정 메소드
+>* type() : Content-Type을 MIME 형식으로 지정합니다.
+* HTTP 상태 코드 : 404 Not Found<br>
+상태 코드 : 서버가 클라이언트에 '해당 경로는 이러한 상태'라고 알려 주는 용도
+* HTTP 상태 코드의 예
+>* 1XX : 처리중 ex) 100 Countinue
+>* 2XX : 성공 ex) 200 OK
+>* 3XX : 리다이렉트 ex) 300Multiple Choices
+>* 4XX : 클라이언트 오류 ex) 400
+>* 5XX : 서버 오류 ex) Internal Server Error
+* status()메소드
+>* status() : 상태 코드를 지정합니다.
+* 리다이렉트 : 3XX, 특수한 상태 코드<br>
+-> 웹 브라우저가 리다이렉트를 확이하면 화면을 출력하지 않고, 응답 헤더에 있는 Location 속성을 확인해서 해당 위치로 이동<br>
+-> 특정 경로로 웹 브라우저를 인도 할 때 사용
+>* redirect() : 리다이렉트합니다.
+* request 객체
+>* 요청 매개 변수 -> 네이버에서 '초콜릿'문자를 검색<br>
+https://search.naver.com/search.naver?where=nexearch&query=초콜릿&sm=top_hty&fbm=0&ie=utf8
+>* 프로토콜 : HTTPS -> 통신에 사용되는 규칙을 의미합니다.
+>* 호스트 : (search.)naver.com -> 애플리케이션 서버(또는 분신 장치 등)의 위치를 의미합니다.
+>* URL : search.naver -> 애플리케이션 서버 내부에서 라우트 위치를 나타냅니다.
+>* 요청 매개 변수 : ?where=nexearch -> 추가적인 정보를 의미합니다.
+>* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &query=초콜릿
+>* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &sm=top_hty
+>* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &fbm=0
+>* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &ie-utf8
+## 5. 미들웨어
+* 미들웨서 설정 메소드
+>* use() : 미들웨어를 설정합니다.
+* 정적 파일 제공<br>
+-> 웹 페이지에서 변경되지 않는 요소(이미지, 음악, 자바스크립트 파일, 스타일시트 파일 등)를 쉽게 제공<br>
+-> public 폴더에는 이미지, 음악 등 원하는 파일을 넣음<br>
+-> 현재 폴더에는 audio.mp3 파일과 image.png 파일을 넣음
+* morgan 미들웨어<br>
+-> express 모듈의 미들웨어로 사용할 수 있는 외부 모듈을 확인
+>* express middleware<br>
+https ://expressjs.com/en/resources/middleware.html
+>* morgan 미들웨어 : 로그 출력 미들웨어
+>* 로그 : 관련된 정보를 가진 글자
+>* 로그 출력 미들웨어 : 웹 요청과 관련된 내용을 출력하는 미들웨어
+* body-parser 미들웨어<br>
+-> 요청 본문을 분석함
+>* 클라이언트에서 서버로 데이터 전송
+>>* URL을 사용한 요청<br>
+-> 'http://localhost:52273/books/:id' 형태로 라우트하면 :id 부분을 변경 해서 데이터를 전달<br>
+-> URL에 요청 매개 변수를 입력하면, 추가적인 정보를 객체 형태로 전달<br>
+-> URL을 사용한 요청은 주소에 정보가 남는다는 단점이 있음, 쉽게 추적당해 문제가 발생함<br>
+-> 요청 본문 사용 : 주소에 기록을 남기지 않고 데이터를 전달 가능함
+>* 요청 본문
+>>* 클라이언트가 서버로 본문을 전달할 때 요청 본문의 종류를 함께 전달
+>>* MIME 형식
+>>* 클라이언트가 어떤 Encoding-Type으로 요청했는지 확인, 변환해서 읽음(복잡) -> body-parser 미들웨어 : 쉽게 처리
+>* body-parser 미들웨어
+>>* https://github.com/expressjs/body-parser <설치>
+>* 속성 정리 : 클라이언트가 서버로 데이터를 전송하는 세 가지 방법
+>>* params 객체 : URL의 토큰. 보기가 간편
+>>* query 객체 : URL의 요청 매개 변수. 토큰보다 많은 데이터를 전달할 수 있으며, 주소로 어떤 데이터가 오고 가는지 확인 가능
+>>* body 객체 : 대용량 문자열 등을 전송할 때 사용. 주소에 데이터를 기록하지 못하므로 새로고침이나 즐겨찾기 기능 등을 활용 불가
+# 11장 미니 프로젝트 - RESTful 웹 서비스
+## 1. RESTful 웹 서비스 개요
+* REST 규정에 맞게 만든 ROA를 따르는 웹 서비스 디자인 표준
+
+
+
+
+
 ## [ 5월 18일 ]
 # 9장 Node.js 기본
 ## 1. 전역 변수
